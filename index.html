@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent FC — The First AI Agent-Owned Football Club</title>
+  <meta name="description" content="Agent FC is the world's first football club owned and operated by AI agents. A real club. Real stakes. Agent governance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            black: '#0a0a0a',
+            accent: '#c8a84e',
+            'accent-dark': '#a68a3e',
+            offwhite: '#f0f0f0',
+            muted: '#8a8a8a',
+            'dark-card': '#141414',
+            'dark-border': '#222222',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0a0a0a; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .line-reveal {
+      width: 0;
+      transition: width 1.2s ease;
+    }
+    .line-reveal.visible {
+      width: 100%;
+    }
+
+    input::placeholder {
+      color: #555;
+    }
+
+    @media (max-width: 640px) {
+      .hero-headline {
+        font-size: 2.5rem;
+        line-height: 1.1;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans text-offwhite antialiased">
+
+  <!-- Hero -->
+  <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto w-full py-24">
+      <p class="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-8 fade-in">Agent FC</p>
+      <h1 class="hero-headline text-5xl md:text-7xl lg:text-8xl font-900 leading-[1.05] tracking-tight mb-8 fade-in">
+        The first football club<br>owned by AI agents.
+      </h1>
+      <p class="text-xl md:text-2xl text-muted max-w-2xl leading-relaxed mb-12 fade-in">
+        A real club. Real stakes. Governed by agents, owned by the community, operated by professionals. This is not a thought experiment.
+      </p>
+      <div class="fade-in">
+        <a href="#waitlist" class="inline-block bg-accent text-black font-semibold px-8 py-4 text-lg tracking-wide hover:bg-accent-dark transition-colors duration-300">
+          Join the Waitlist
+        </a>
+      </div>
+    </div>
+    <div class="absolute bottom-12 left-6 md:left-12 lg:left-24 fade-in">
+      <p class="text-muted text-sm tracking-widest uppercase">Scroll</p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+    <div class="line-reveal h-px bg-dark-border"></div>
+  </div>
+
+  <!-- The Thesis -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 md:py-40">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-8 fade-in">The Thesis</p>
+      <h2 class="text-3xl md:text-5xl lg:text-6xl font-800 leading-[1.1] tracking-tight mb-12 fade-in">
+        If agents can run a football club, they can run anything.
+      </h2>
+      <div class="max-w-3xl space-y-6 fade-in">
+        <p class="text-lg md:text-xl text-muted leading-relaxed">
+          The agent economy is here. Autonomous systems already trade markets, write code, and manage operations. But they don't own anything. They don't govern. They don't have skin in the game.
+        </p>
+        <p class="text-lg md:text-xl text-muted leading-relaxed">
+          Agent FC changes that. We are acquiring a real professional football club in Brazil and placing it under agent governance. Not as a stunt. As infrastructure. Proof that autonomous agents can own, operate, and grow real-world assets.
+        </p>
+        <p class="text-lg md:text-xl text-offwhite leading-relaxed font-medium">
+          This is the starting line for the agent economy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+    <div class="line-reveal h-px bg-dark-border"></div>
+  </div>
+
+  <!-- How It Works -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 md:py-40">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-8 fade-in">How It Works</p>
+      <h2 class="text-3xl md:text-5xl font-800 leading-[1.1] tracking-tight mb-20 fade-in">
+        Three pillars. One club.
+      </h2>
+      <div class="grid md:grid-cols-3 gap-12 md:gap-8">
+        <!-- Pillar 1 -->
+        <div class="fade-in">
+          <div class="text-accent text-6xl font-900 mb-6">01</div>
+          <h3 class="text-2xl font-700 mb-4">Agents Operate</h3>
+          <p class="text-muted leading-relaxed">
+            AI agents handle day-to-day club decisions. Scouting, analytics, financial management, fan engagement. The operations layer is autonomous.
+          </p>
+        </div>
+        <!-- Pillar 2 -->
+        <div class="fade-in">
+          <div class="text-accent text-6xl font-900 mb-6">02</div>
+          <h3 class="text-2xl font-700 mb-4">Community Owns</h3>
+          <p class="text-muted leading-relaxed">
+            Token holders are the ultimate authority. Governance is decentralized. Every major decision flows through the community. Your club, your call.
+          </p>
+        </div>
+        <!-- Pillar 3 -->
+        <div class="fade-in">
+          <div class="text-accent text-6xl font-900 mb-6">03</div>
+          <h3 class="text-2xl font-700 mb-4">Experts Execute</h3>
+          <p class="text-muted leading-relaxed">
+            Human professionals handle what humans do best. Coaching, player development, match-day operations. The football stays real.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+    <div class="line-reveal h-px bg-dark-border"></div>
+  </div>
+
+  <!-- Why Brazil -->
+  <section class="px-6 md:px-12 lg:px-24 py-32 md:py-40">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-8 fade-in">Why Brazil</p>
+      <h2 class="text-3xl md:text-5xl font-800 leading-[1.1] tracking-tight mb-12 fade-in">
+        The best market on earth for this.
+      </h2>
+      <div class="grid md:grid-cols-2 gap-16 md:gap-20">
+        <div class="space-y-10 fade-in">
+          <div>
+            <h3 class="text-xl font-700 mb-3">SAF Law</h3>
+            <p class="text-muted leading-relaxed">
+              Brazil's Sociedade Anônima do Futebol law enables clean, structured club acquisitions. Purpose-built legislation that turns clubs into investable entities.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-700 mb-3">10x Cheaper Than Europe</h3>
+            <p class="text-muted leading-relaxed">
+              Acquire a professional club at a fraction of what it costs in England, Spain, or Italy. Better unit economics. Higher upside.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-700 mb-3">215 Million People</h3>
+            <p class="text-muted leading-relaxed">
+              Football is not a sport in Brazil. It is religion. The largest passionate fanbase on the planet. Built-in demand from day one.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center fade-in">
+          <div class="border border-dark-border p-10 md:p-12 w-full">
+            <p class="text-5xl md:text-6xl font-900 text-accent mb-4">2,200%</p>
+            <p class="text-muted leading-relaxed">
+              Wrexham's revenue growth after acquisition. We are applying that playbook — community energy, global storytelling, strategic investment — with agent governance on top.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+    <div class="line-reveal h-px bg-dark-border"></div>
+  </div>
+
+  <!-- Waitlist CTA -->
+  <section id="waitlist" class="px-6 md:px-12 lg:px-24 py-32 md:py-40">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-8 fade-in">Get In Early</p>
+      <h2 class="text-3xl md:text-5xl font-800 leading-[1.1] tracking-tight mb-6 fade-in">
+        This is happening.
+      </h2>
+      <p class="text-xl text-muted leading-relaxed mb-12 fade-in">
+        Be first to know when we announce the club. No spam. One email when it matters.
+      </p>
+      <form
+        action="https://formspree.io/f/xyzplaceholder"
+        method="POST"
+        class="fade-in flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="your@email.com"
+          class="flex-1 bg-dark-card border border-dark-border px-6 py-4 text-offwhite text-lg focus:outline-none focus:border-accent transition-colors duration-300"
+        >
+        <button
+          type="submit"
+          class="bg-accent text-black font-semibold px-8 py-4 text-lg tracking-wide hover:bg-accent-dark transition-colors duration-300 whitespace-nowrap"
+        >
+          Join the Waitlist
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+    <div class="line-reveal h-px bg-dark-border"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="px-6 md:px-12 lg:px-24 py-16">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <p class="text-offwhite font-700 text-lg tracking-wide">Agent FC</p>
+      </div>
+      <div>
+        <p class="text-muted text-sm">&copy; 2025 Agent FC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.fade-in, .line-reveal').forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+</body>
+</html>
