@@ -426,24 +426,24 @@ This is not financial advice. This is a movement.</pre>
     }
 
     function copyToClipboard(elementId, btn) {
-      const text = document.getElementById(elementId).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        // Brief visual feedback
-        const originalHTML = btn.innerHTML;
+      var text = document.getElementById(elementId).textContent;
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      var success = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      
+      if (success) {
+        var originalHTML = btn.innerHTML;
         btn.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span class="text-sm text-accent">Copied!</span>';
-        setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
-      }).catch(() => {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span class="text-sm text-accent">Copied!</span>';
-        setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
-      });
+        setTimeout(function() { btn.innerHTML = originalHTML; }, 1500);
+      } else {
+        alert('Copy failed. Please select and copy manually.');
+      }
     }
   </script>
 
