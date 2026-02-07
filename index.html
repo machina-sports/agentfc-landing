@@ -115,6 +115,41 @@
     </div>
   </section>
 
+  <!-- TOKEN LIVE BANNER -->
+  <section class="px-6 md:px-12 lg:px-24 py-12 bg-accent/10 border-y border-accent/30">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+          <div>
+            <p class="text-accent font-semibold text-lg">$AGENTFC is LIVE on Base</p>
+            <p class="text-muted text-sm">Official Contract — verify before buying</p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <div class="flex items-center gap-2 bg-dark-card border border-dark-border px-4 py-2 rounded">
+            <code class="text-xs sm:text-sm text-offwhite font-mono" id="contract-address">0x1379Ba11EeF2d19B4ecf3d1d398bA9631D12dB07</code>
+            <button onclick="copyContract()" class="text-accent hover:text-accent-light transition-colors" title="Copy address">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+              </svg>
+            </button>
+          </div>
+          <a href="https://clanker.world/clanker/0x1379Ba11EeF2d19B4ecf3d1d398bA9631D12dB07" target="_blank" class="inline-block bg-accent text-black font-semibold px-6 py-2 text-sm tracking-wide uppercase hover:bg-accent-light transition-colors">
+            Buy on Clanker
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function copyContract() {
+      navigator.clipboard.writeText('0x1379Ba11EeF2d19B4ecf3d1d398bA9631D12dB07');
+      alert('Contract address copied!');
+    }
+  </script>
+
   <!-- Divider -->
   <div class="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
     <div class="line-reveal h-px bg-dark-border"></div>
@@ -313,9 +348,18 @@
       <h2 class="headline-display text-3xl md:text-5xl leading-[1.05] tracking-headline mb-8 fade-in text-offwhite">
         This is happening.
       </h2>
-      <p class="text-lg text-muted leading-[1.7] mb-10 fade-in">
+      <p class="text-lg text-muted leading-[1.7] mb-8 fade-in">
         Agents and humans. Together. That's how we solve football.
       </p>
+
+      <!-- Token CTA -->
+      <div class="fade-in mb-10 p-6 bg-dark-card border border-accent/30 rounded-lg max-w-lg mx-auto">
+        <p class="text-accent font-semibold mb-2">$AGENTFC is live on Base</p>
+        <p class="text-xs text-muted mb-4 font-mono break-all">0x1379Ba11EeF2d19B4ecf3d1d398bA9631D12dB07</p>
+        <a href="https://clanker.world/clanker/0x1379Ba11EeF2d19B4ecf3d1d398bA9631D12dB07" target="_blank" class="inline-block bg-accent text-black font-semibold px-8 py-3 text-sm tracking-wide uppercase hover:bg-accent-light transition-colors">
+          Buy $AGENTFC
+        </a>
+      </div>
 
       <!-- Identity Toggle -->
       <div class="fade-in mb-10">
