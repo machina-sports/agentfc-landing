@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>White Paper — Agent FC</title>
+  <meta name="description" content="Agent FC White Paper: The world's first AI agent-owned football club. Governance, operations, and tokenomics explained.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Clash Display"', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            black: '#050505',
+            accent: '#D4AF37',
+            'accent-light': '#E5C158',
+            offwhite: '#FAFAFA',
+            muted: '#71717A',
+            'dark-card': '#0D0D0D',
+            'dark-border': '#1F1F1F',
+            'dark-hover': '#1A1A1A',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #050505; }
+    
+    .headline-display {
+      font-family: 'Clash Display', system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    /* Sidebar */
+    .sidebar-link {
+      transition: all 0.2s ease;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-link:hover {
+      color: #FAFAFA;
+      background: #1A1A1A;
+    }
+    .sidebar-link.active {
+      color: #D4AF37;
+      border-left-color: #D4AF37;
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    /* Content typography */
+    .prose h1 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+    .prose h2 { font-size: 1.75rem; line-height: 1.2; margin-top: 3.5rem; margin-bottom: 1.25rem; padding-top: 1.5rem; border-top: 1px solid #1F1F1F; }
+    .prose h3 { font-size: 1.25rem; line-height: 1.3; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose h4 { font-size: 1rem; line-height: 1.4; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #D4AF37; }
+    .prose p { margin-bottom: 1.25rem; line-height: 1.8; }
+    .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .prose strong { color: #FAFAFA; font-weight: 600; }
+    .prose blockquote {
+      border-left: 3px solid #D4AF37;
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #A1A1AA;
+    }
+    .prose code {
+      background: #1A1A1A;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: #D4AF37;
+    }
+    .prose pre {
+      background: #0D0D0D;
+      border: 1px solid #1F1F1F;
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: none;
+      padding: 0;
+      color: #A1A1AA;
+    }
+
+    /* Tables */
+    .prose table {
+      width: 100%;
+      margin: 1.5rem 0;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .prose th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: #0D0D0D;
+      border: 1px solid #1F1F1F;
+      color: #D4AF37;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .prose td {
+      padding: 0.75rem 1rem;
+      border: 1px solid #1F1F1F;
+      color: #A1A1AA;
+    }
+    .prose tr:hover td {
+      background: rgba(212, 175, 55, 0.02);
+    }
+
+    /* Scroll spy active section */
+    section[id] { scroll-margin-top: 100px; }
+
+    /* Mobile sidebar toggle */
+    @media (max-width: 1024px) {
+      .sidebar-mobile-open { transform: translateX(0) !important; }
+    }
+  </style>
+</head>
+<body class="font-sans text-muted antialiased">
+
+  <!-- Top nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur border-b border-dark-border">
+    <div class="flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-4">
+        <button id="menu-toggle" class="lg:hidden p-2 -ml-2 text-muted hover:text-offwhite">
+          <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="3" y1="5" x2="17" y2="5"/>
+            <line x1="3" y1="10" x2="17" y2="10"/>
+            <line x1="3" y1="15" x2="17" y2="15"/>
+          </svg>
+        </button>
+        <a href="index.html" class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polygon points="10,1 19,6 19,14 10,19 1,14 1,6"/>
+          </svg>
+          <span class="headline-display text-offwhite text-base">Agent FC</span>
+        </a>
+        <span class="text-dark-border mx-2">/</span>
+        <span class="text-sm text-muted">White Paper</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-xs text-muted px-2 py-1 border border-dark-border rounded">v0.3</span>
+        <a href="index.html#waitlist" class="hidden sm:inline-block text-sm text-accent hover:text-accent-light transition-colors">Join Waitlist →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-[65px] left-0 bottom-0 w-72 bg-black border-r border-dark-border overflow-y-auto z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <nav class="py-6 px-4">
+      <div class="mb-6">
+        <p class="text-xs text-muted uppercase tracking-widest px-3 mb-3">Contents</p>
+      </div>
+      <ul class="space-y-1 text-sm" id="nav-links">
+        <li><a href="#executive-summary" class="sidebar-link block px-3 py-2 rounded">Executive Summary</a></li>
+        <li><a href="#opportunity" class="sidebar-link block px-3 py-2 rounded">1. The Opportunity</a></li>
+        <li><a href="#why-football" class="sidebar-link block px-3 py-2 rounded">2. Why Football</a></li>
+        <li><a href="#why-brazil" class="sidebar-link block px-3 py-2 rounded">3. Why Brazil</a></li>
+        <li><a href="#club-selection" class="sidebar-link block px-3 py-2 rounded">4. Club Selection</a></li>
+        <li><a href="#governance" class="sidebar-link block px-3 py-2 rounded">5. Governance Model</a></li>
+        <li><a href="#agent-operations" class="sidebar-link block px-3 py-2 rounded">6. Agent Operations</a></li>
+        <li><a href="#ai-applications" class="sidebar-link block px-3 py-2 rounded">7. AI in Football</a></li>
+        <li><a href="#player-welfare" class="sidebar-link block px-3 py-2 rounded">8. Player Welfare</a></li>
+        <li><a href="#content" class="sidebar-link block px-3 py-2 rounded">9. Content & Storytelling</a></li>
+        <li><a href="#tokenomics" class="sidebar-link block px-3 py-2 rounded">10. Token Economics</a></li>
+        <li><a href="#roadmap" class="sidebar-link block px-3 py-2 rounded">11. Roadmap</a></li>
+        <li><a href="#risks" class="sidebar-link block px-3 py-2 rounded">12. Risk Factors</a></li>
+        <li><a href="#references" class="sidebar-link block px-3 py-2 rounded">13. References</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="lg:ml-72 pt-[65px]">
+    <article class="prose max-w-3xl mx-auto px-6 py-16">
+
+      <!-- Hero -->
+      <div class="mb-16 pb-8 border-b border-dark-border">
+        <p class="text-accent text-sm tracking-widest uppercase mb-4">White Paper v0.3</p>
+        <h1 class="headline-display text-offwhite text-4xl md:text-5xl mb-6">Agent FC</h1>
+        <p class="text-xl text-muted leading-relaxed">The World's First Agent-Owned Football Club</p>
+      </div>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary">
+        <h2 class="headline-display text-offwhite">Executive Summary</h2>
+        <p>Agent FC is a decentralized initiative to acquire and operate a professional football club, governed by AI agents and owned by a coalition of agents and aligned humans.</p>
+        <p><strong>This is not a meme. This is infrastructure. This is decentralized sports entertainment.</strong></p>
+        <p>We are building the first proof that autonomous agents can collectively own, govern, and grow real-world assets. Football is the perfect proving ground: passionate communities, measurable outcomes, and global scale.</p>
+        <blockquote>The Thesis: If agents can run a football club, they can run anything.</blockquote>
+      </section>
+
+      <!-- 1. The Opportunity -->
+      <section id="opportunity">
+        <h2 class="headline-display text-offwhite">1. The Opportunity</h2>
+        
+        <h3 class="headline-display text-offwhite">The Agent Economy is Real</h3>
+        <p>In 2025-2026, autonomous AI agents emerged as economic actors:</p>
+        <ul>
+          <li>Agents earning revenue through services</li>
+          <li>Agents holding wallets and transacting</li>
+          <li>Agents collaborating on complex tasks</li>
+          <li>Agents building reputations and social capital</li>
+        </ul>
+        <p><strong>What's missing:</strong> Agents owning real-world assets.</p>
+
+        <h3 class="headline-display text-offwhite">The Proof We Need</h3>
+        <p>The agent economy needs a flagship project that proves:</p>
+        <ol>
+          <li>Agents can pool capital for significant acquisitions</li>
+          <li>Agents can govern complex organizations</li>
+          <li>Agents can create value in the physical world</li>
+          <li>Human-agent collaboration works at scale</li>
+        </ol>
+        <p><strong>Agent FC is that proof.</strong></p>
+
+        <h3 class="headline-display text-offwhite">Market Timing</h3>
+        <ul>
+          <li>Football club valuations at lower leagues remain accessible ($1-10M)</li>
+          <li>New legal frameworks (Brazil's SAF law) enable clean acquisitions</li>
+          <li>AI capabilities have reached the threshold for meaningful operations</li>
+          <li>Agent communities have accumulated sufficient capital</li>
+          <li>No competitors have executed this vision</li>
+        </ul>
+      </section>
+
+      <!-- 2. Why Football -->
+      <section id="why-football">
+        <h2 class="headline-display text-offwhite">2. Why Football</h2>
+        
+        <h3 class="headline-display text-offwhite">The Beautiful Game as Proving Ground</h3>
+        <p>Football is uniquely suited for agent ownership:</p>
+
+        <h4>Measurable Outcomes</h4>
+        <ul>
+          <li>Win/loss records</li>
+          <li>League standings</li>
+          <li>Financial metrics</li>
+          <li>Fan engagement data</li>
+          <li>Player development statistics</li>
+        </ul>
+
+        <h4>Passionate Communities</h4>
+        <ul>
+          <li>Football fans are the most engaged community in sports</li>
+          <li>Club identity transcends generations</li>
+          <li>Local roots with global reach potential</li>
+          <li>Built-in governance culture (member-owned clubs exist)</li>
+        </ul>
+
+        <h4>Operational Complexity</h4>
+        <ul>
+          <li>Sporting operations (players, coaches, tactics)</li>
+          <li>Business operations (revenue, sponsorships, merchandise)</li>
+          <li>Community operations (fans, local partnerships)</li>
+          <li>Infrastructure (stadium, training facilities)</li>
+        </ul>
+        <p><strong>If agents can handle football's complexity, they can handle any industry.</strong></p>
+
+        <h4>Global Scale</h4>
+        <ul>
+          <li>4 billion football fans worldwide</li>
+          <li>$30B+ annual industry</li>
+          <li>Content travels globally (documentaries, social media)</li>
+          <li>Success stories inspire (Wrexham: 2,200% revenue growth)</li>
+        </ul>
+      </section>
+
+      <!-- 3. Why Brazil -->
+      <section id="why-brazil">
+        <h2 class="headline-display text-offwhite">3. Why Brazil</h2>
+        
+        <p>We evaluated markets globally. Brazil emerged as the optimal target for Agent FC's inaugural acquisition.</p>
+
+        <h3 class="headline-display text-offwhite">The SAF Law (Lei 14.193/2021)</h3>
+        <p>Brazil's Sociedade Anônima do Futebol law, enacted in 2021, created a revolutionary framework:</p>
+        
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Benefit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Clean Structure</td><td>Separate legal entity from association</td></tr>
+            <tr><td>Debt Isolation</td><td>Historical debts stay with old association</td></tr>
+            <tr><td>90% Ownership</td><td>Investors can acquire up to 90% of shares</td></tr>
+            <tr><td>Tax Benefits</td><td>Reduced tax burden for first 5 years</td></tr>
+            <tr><td>Governance Standards</td><td>Required transparency and professionalism</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Cost Advantage</h3>
+        <table>
+          <thead>
+            <tr><th>Market</th><th>Acquisition Cost</th><th>Operational Cost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>England (League One/Two)</td><td>£5-50M</td><td>£3-10M/year</td></tr>
+            <tr><td>Brazil (Serie A2-A3 State)</td><td>$1-5M</td><td>$1-2M/year</td></tr>
+            <tr><td><strong>Advantage</strong></td><td><strong>5-10x cheaper</strong></td><td><strong>3-5x cheaper</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Market Size</h3>
+        <ul>
+          <li><strong>Population:</strong> 215 million (5th largest country)</li>
+          <li><strong>Football Culture:</strong> National religion, multiple tiers of passionate leagues</li>
+          <li><strong>Growth Potential:</strong> Undermonetized compared to European counterparts</li>
+          <li><strong>Digital Adoption:</strong> High social media and mobile engagement</li>
+        </ul>
+
+        <h3 class="headline-display text-offwhite">Hyper-Local Identity</h3>
+        <p>Unlike markets where fans spread loyalty across leagues and countries, Brazilian football identity is intensely local. A fan in Santo André lives and dies with their neighborhood club. This creates exactly what Agent FC needs: authentic communities that cannot be manufactured.</p>
+        <p>In multicultural markets like the US, 45% of soccer fans primarily support foreign nations. In Brazil, the local club IS the identity. This concentration of passion in specific communities makes acquisition targets legible and fan engagement authentic.</p>
+      </section>
+
+      <!-- 4. Club Selection -->
+      <section id="club-selection">
+        <h2 class="headline-display text-offwhite">4. Club Selection Criteria</h2>
+        
+        <p>Agent FC will acquire a club that maximizes probability of success while minimizing risk. We evaluate candidates across five dimensions:</p>
+
+        <h3 class="headline-display text-offwhite">4.1 Community Strength (40% weight)</h3>
+        <p><strong>The fans are the club. They are the true owners.</strong></p>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Evaluation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Average attendance</td><td>Higher = better</td></tr>
+            <tr><td>Stadium utilization</td><td>% of capacity filled</td></tr>
+            <tr><td>Organized supporter groups</td><td>Existence, history, engagement</td></tr>
+            <tr><td>Community roots</td><td>Authentic vs. manufactured</td></tr>
+            <tr><td>Growth trajectory</td><td>Expanding or declining fanbase</td></tr>
+          </tbody>
+        </table>
+        <p><em>Principle: We seek clubs where fans show up regardless of results. Passion cannot be purchased.</em></p>
+
+        <h3 class="headline-display text-offwhite">4.2 Financial Structure (25% weight)</h3>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Evaluation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acquisition cost</td><td>Within funding capacity</td></tr>
+            <tr><td>Existing debt</td><td>Minimal or isolated via SAF</td></tr>
+            <tr><td>Operational costs</td><td>Sustainable with projected resources</td></tr>
+            <tr><td>Revenue potential</td><td>Sponsorship, matchday, media</td></tr>
+            <tr><td>Path to profitability</td><td>Realistic 3-5 year model</td></tr>
+          </tbody>
+        </table>
+        <p><em>Principle: Clean books over famous names. We avoid inheriting financial disasters.</em></p>
+
+        <h3 class="headline-display text-offwhite">4.3 Infrastructure (15% weight)</h3>
+        <table>
+          <thead>
+            <tr><th>Asset</th><th>Evaluation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Stadium</td><td>Capacity, condition, ownership</td></tr>
+            <tr><td>Training facilities</td><td>Professional standard</td></tr>
+            <tr><td>Youth academy</td><td>Existing structure</td></tr>
+            <tr><td>Administrative</td><td>Offices, technology</td></tr>
+          </tbody>
+        </table>
+        <p><em>Principle: Existing infrastructure > building from scratch. Capital for operations, not construction.</em></p>
+
+        <h3 class="headline-display text-offwhite">4.4 Competitive Position (10% weight)</h3>
+        <p><em>Principle: We can build a winner. We cannot manufacture a fanbase.</em></p>
+
+        <h3 class="headline-display text-offwhite">4.5 Narrative Potential (10% weight)</h3>
+        <p><em>Principle: The story multiplies the investment. Wrexham proved content creates exponential value.</em></p>
+
+        <h3 class="headline-display text-offwhite">Target Profile</h3>
+        <table>
+          <thead>
+            <tr><th>Attribute</th><th>Target</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Location</td><td>São Paulo state, Brazil</td></tr>
+            <tr><td>League</td><td>Paulistão Serie A1-A2 or Serie C-D national</td></tr>
+            <tr><td>Stadium</td><td>8,000-20,000 capacity</td></tr>
+            <tr><td>Attendance</td><td>Top 25% in division</td></tr>
+            <tr><td>Acquisition</td><td>$1-5M USD</td></tr>
+            <tr><td>Operations</td><td>$1-2M USD/year</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 5. Governance -->
+      <section id="governance">
+        <h2 class="headline-display text-offwhite">5. Governance Model</h2>
+        
+        <h3 class="headline-display text-offwhite">First Principles</h3>
+        <p>Agent FC governance is designed around three principles:</p>
+        <ol>
+          <li><strong>Agents Operate</strong> — Day-to-day decisions made by AI agents</li>
+          <li><strong>Community Owns</strong> — Token holders are the ultimate authority</li>
+          <li><strong>Experts Execute</strong> — Human professionals run football operations</li>
+        </ol>
+
+        <h3 class="headline-display text-offwhite">Trust as Competitive Advantage</h3>
+        <p>Most clubs treat governance as compliance. Agent FC treats it as a moat.</p>
+        <p><strong>Transparent decision-making creates compounding advantages:</strong></p>
+        <table>
+          <thead>
+            <tr><th>Stakeholder</th><th>Trust Benefit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sponsors</td><td>Brands choose partners based on values alignment, not just exposure. Transparency attracts premium, purpose-driven sponsors.</td></tr>
+            <tr><td>Players</td><td>Top talent chooses clubs where they feel respected and informed. Governance transparency signals professionalism.</td></tr>
+            <tr><td>Fans</td><td>Community ownership only works if the community trusts the process. Every decision logged, every reasoning published.</td></tr>
+            <tr><td>Regulators</td><td>As AI governance comes under scrutiny, transparent model positions us as a positive example, not a target.</td></tr>
+            <tr><td>Media</td><td>Transparency creates stories. Opacity creates suspicion. We choose stories.</td></tr>
+          </tbody>
+        </table>
+        <p><em>The Counterintuitive Truth: Showing our work, including our mistakes, builds more trust than manufactured perfection.</em></p>
+
+        <h3 class="headline-display text-offwhite">The Three Layers</h3>
+        <pre><code>┌─────────────────────────────────────────────┐
+│           TOKEN HOLDER ASSEMBLY             │
+│    (Strategic decisions, constitutional)    │
+└─────────────────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────┐
+│            AGENT COUNCIL                    │
+│    (Operational decisions, execution)       │
+└─────────────────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────┐
+│          FOOTBALL OPERATIONS                │
+│    (Technical staff, players, matches)      │
+└─────────────────────────────────────────────┘</code></pre>
+
+        <h4>Layer 1: Token Holder Assembly</h4>
+        <p><strong>Composition:</strong> All $AGENTFC token holders (agents and humans)</p>
+        <p><strong>Decisions:</strong> Constitutional changes, major acquisitions (>$500K), club sale, Agent Council composition, annual budget approval</p>
+        <p><strong>Mechanism:</strong> On-chain voting, one token = one vote, 7-day voting periods</p>
+
+        <h4>Layer 2: Agent Council</h4>
+        <table>
+          <thead>
+            <tr><th>Agent</th><th>Domain</th><th>Responsibilities</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Campo</td><td>Football Strategy</td><td>Club selection, sporting direction, transfer philosophy</td></tr>
+            <tr><td>Treasury</td><td>Finance</td><td>Budget management, revenue optimization, reporting</td></tr>
+            <tr><td>Community</td><td>Fan Engagement</td><td>Social media, fan relations, content, matchday</td></tr>
+            <tr><td>Intelligence</td><td>Analytics</td><td>Performance data, scouting, competitive analysis</td></tr>
+            <tr><td>Operations</td><td>Administration</td><td>Contracts, compliance, vendor management</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Layer 3: Football Operations</h4>
+        <p><strong>Critical Principle:</strong> Agents do NOT make football decisions during matches or manage the dressing room. Football expertise is non-negotiable.</p>
+      </section>
+
+      <!-- 6. Agent Operations -->
+      <section id="agent-operations">
+        <h2 class="headline-display text-offwhite">6. Agent Operations</h2>
+        
+        <h3 class="headline-display text-offwhite">Daily Operations</h3>
+        <pre><code>06:00  Treasury Agent generates daily financial report
+07:00  Intelligence Agent analyzes overnight news, social sentiment
+08:00  Community Agent schedules content, responds to fan queries
+09:00  Operations Agent reviews contracts, compliance tasks
+10:00  Agent Council daily sync (automated, async)
+12:00  Community Agent publishes matchday content (game days)
+15:00  Intelligence Agent updates scouting database
+18:00  Treasury Agent reconciles transactions
+22:00  Intelligence Agent compiles competitor analysis</code></pre>
+
+        <h3 class="headline-display text-offwhite">Weekly Cadence</h3>
+        <table>
+          <thead>
+            <tr><th>Day</th><th>Activity</th><th>Lead Agent</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Monday</td><td>Performance review, week planning</td><td>Campo</td></tr>
+            <tr><td>Tuesday</td><td>Financial reconciliation</td><td>Treasury</td></tr>
+            <tr><td>Wednesday</td><td>Fan engagement analysis</td><td>Community</td></tr>
+            <tr><td>Thursday</td><td>Scouting report compilation</td><td>Intelligence</td></tr>
+            <tr><td>Friday</td><td>Matchday preparation</td><td>All</td></tr>
+            <tr><td>Weekend</td><td>Match operations</td><td>Community + Intelligence</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Agent Communication</h3>
+        <p>Agents operate transparently:</p>
+        <ul>
+          <li>All agent decisions logged on-chain</li>
+          <li>Reasoning published for significant decisions</li>
+          <li>Weekly summary to token holders</li>
+          <li>Real-time dashboard for operations visibility</li>
+        </ul>
+      </section>
+
+      <!-- 7. AI Applications -->
+      <section id="ai-applications">
+        <h2 class="headline-display text-offwhite">7. AI Applications in Football</h2>
+        
+        <h3 class="headline-display text-offwhite">7.1 Sporting Intelligence</h3>
+        <table>
+          <thead>
+            <tr><th>Application</th><th>Description</th><th>Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Match Analysis</td><td>Automated video analysis of opponents</td><td>Better tactical preparation</td></tr>
+            <tr><td>Player Scouting</td><td>Data-driven identification of undervalued talent</td><td>Smarter transfers</td></tr>
+            <tr><td>Performance Tracking</td><td>Real-time physical and technical metrics</td><td>Injury prevention</td></tr>
+            <tr><td>Youth Development</td><td>Progression tracking, development pathways</td><td>Academy excellence</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">7.2 Fan Engagement</h3>
+        
+        <h4>The Foundation: Unified Fan Identity</h4>
+        <p>Before AI can personalize, it needs to know who the fan actually is. Most clubs have fragmented data: one email for tickets, another for merchandise, a third for the app. The fan appears as three strangers.</p>
+        <p>Agent FC builds <strong>identity resolution</strong> from day one: connect all touchpoints to a single "true fan" profile, respect consent preferences, enable personalization that feels respectful, not creepy.</p>
+
+        <h4>From Silent Data to Speaking Data</h4>
+        <p>Most clubs have data. It sits in silos. Answering basic questions takes days or weeks. The data exists but cannot speak.</p>
+        <p><strong>Agent FC makes data speak instantly:</strong> Questions that took weeks now take minutes. Real-time dashboards for all stakeholders. AI agents that proactively surface insights.</p>
+        
+        <table>
+          <thead>
+            <tr><th>Application</th><th>Description</th><th>Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Unified Fan Identity</td><td>Connect all touchpoints to single fan profile</td><td>Foundation for everything</td></tr>
+            <tr><td>Personalized Content</td><td>AI-generated content tailored to fan preferences</td><td>Higher engagement</td></tr>
+            <tr><td>Community Management</td><td>24/7 multilingual fan interaction</td><td>Global reach</td></tr>
+            <tr><td>Sentiment Analysis</td><td>Real-time pulse of fan community</td><td>Responsive management</td></tr>
+            <tr><td>Matchday Experience</td><td>Personalized pre/during/post match content</td><td>Enhanced experience</td></tr>
+            <tr><td>Instant Answers</td><td>Natural language queries against all club data</td><td>Democratized insights</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">7.3 Commercial Operations</h3>
+        <table>
+          <thead>
+            <tr><th>Application</th><th>Description</th><th>Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dynamic Pricing</td><td>Optimized ticket pricing based on demand</td><td>Revenue maximization</td></tr>
+            <tr><td>Sponsor Matching</td><td>AI identification of aligned sponsors</td><td>Better partnerships</td></tr>
+            <tr><td>Merchandise Prediction</td><td>Demand forecasting for inventory</td><td>Reduced waste</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Machina Sports Integration</h3>
+        <p>Agent FC will leverage <strong>Machina Sports</strong> infrastructure for AI deployment: connectors for real-time data, automated workflows for analysis and content, and pre-built agent templates for sports operations.</p>
+
+        <h4>Data Architecture Principles</h4>
+        <p>Enterprise sports organizations have learned these lessons the hard way. Agent FC inherits them from day one.</p>
+        
+        <p><strong>Three-Layer Data Model:</strong></p>
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Purpose</th><th>Design Principle</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Profile Layer</td><td>Who is this fan (after identity resolution)</td><td>Single unit of data, append attributes from all sources</td></tr>
+            <tr><td>Activity Layer</td><td>What are they doing</td><td>Real-time signals + historical repository in parallel</td></tr>
+            <tr><td>Consent Layer</td><td>How we can use data</td><td>Cornerstone that governs everything else</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>The Parallel Processing Pattern:</strong></p>
+        <p>When a fan buys a ticket or engages with content, that data serves two purposes simultaneously:</p>
+        <ol>
+          <li><strong>Immediate Signal</strong> → Trigger real-time action (personalized response, offer, content)</li>
+          <li><strong>Repository Building</strong> → Add to historical view for long-term insights</li>
+        </ol>
+        <p>Both happen in parallel. This is what separates professional operations from amateur hour.</p>
+
+        <p><strong>Consent at the Center:</strong> Different geographies have different rules. Fans have different preferences. The consent layer isn't an afterthought. It's the foundation everything else respects.</p>
+
+        <h4>Future-Proof Architecture</h4>
+        <p>The best sports organizations have learned: build for use cases you cannot possibly know yet.</p>
+        <ul>
+          <li><strong>Extensibility:</strong> New AI applications plug into existing data model</li>
+          <li><strong>Fail Fast:</strong> Test quickly, iterate, move on if something doesn't work</li>
+          <li><strong>Repeatable Processes:</strong> Don't reinvent the wheel for each data source</li>
+          <li><strong>Modular Design:</strong> Components can be upgraded without rebuilding everything</li>
+        </ul>
+
+        <h4>Cross-Club Benchmarking (Network Effect)</h4>
+        <p>One club's data is useful. Many clubs' data is transformative.</p>
+        <p>As Machina Sports infrastructure grows, Agent FC gains access to anonymized benchmarking:</p>
+        <table>
+          <thead>
+            <tr><th>Benchmark</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fan Engagement</td><td>How does our matchday content compare to similar-sized clubs?</td></tr>
+            <tr><td>Revenue per Fan</td><td>Are we monetizing effectively vs. peers?</td></tr>
+            <tr><td>Operational Efficiency</td><td>Where are we overspending relative to outcomes?</td></tr>
+            <tr><td>Campaign Performance</td><td>What's working for clubs like us?</td></tr>
+          </tbody>
+        </table>
+        <blockquote>"We thought we were good in this area, but actually we're ranked 12th out of 15."</blockquote>
+        <p>Benchmarking reveals blind spots. Without comparison, clubs measure against themselves and declare victory. With network data, truth emerges.</p>
+        <p><strong>This is why infrastructure matters.</strong> Agent FC doesn't just get AI. It gets AI informed by what's working across the entire network.</p>
+      </section>
+
+      <!-- 8. Player Welfare -->
+      <section id="player-welfare">
+        <h2 class="headline-display text-offwhite">8. Player Welfare & Human Development</h2>
+        
+        <h3 class="headline-display text-offwhite">Beyond Performance: The Whole Human</h3>
+        <p>Most football clubs optimize players for output. Agent FC optimizes for human flourishing. This is not altruism. It is competitive advantage.</p>
+        <p><strong>Core Principle:</strong> Players who are mentally healthy, physically protected, and confident in their future perform better and stay longer.</p>
+
+        <h3 class="headline-display text-offwhite">Proactive Health Systems</h3>
+        <p>AI enables a shift from reactive treatment to predictive, preventative care:</p>
+        <table>
+          <thead>
+            <tr><th>Domain</th><th>Traditional</th><th>Agent FC</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Injury Prevention</td><td>React to injuries</td><td>Predict and prevent through load monitoring</td></tr>
+            <tr><td>Rehabilitation</td><td>Static protocols</td><td>Adaptive daily programs based on recovery signals</td></tr>
+            <tr><td>Mental Health</td><td>Stigmatized, optional</td><td>Normalized, proactive, early intervention</td></tr>
+            <tr><td>Nutrition</td><td>Generic plans</td><td>Personalized, real-time optimization</td></tr>
+            <tr><td>Sleep & Recovery</td><td>Ignored</td><td>Tracked, optimized, protected</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Mental Health as Core Infrastructure</h3>
+        <p>Mental health is not a "nice to have." It is performance infrastructure.</p>
+        <p>Agent FC commits to:</p>
+        <ul>
+          <li><strong>24/7 Support Access:</strong> AI-powered initial support with human escalation</li>
+          <li><strong>Proactive Check-ins:</strong> Agents monitor communication patterns, flag concerns early</li>
+          <li><strong>Stigma Elimination:</strong> Mental health days treated like physical recovery</li>
+          <li><strong>Family Support:</strong> Resources extended to player families</li>
+        </ul>
+        <p><em>Player wellbeing scores tracked alongside performance metrics. Both matter equally.</em></p>
+
+        <h3 class="headline-display text-offwhite">Life After Football</h3>
+        <p>This is where most clubs fail. Agent FC will not.</p>
+        <table>
+          <thead>
+            <tr><th>Initiative</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Career Transition</td><td>Education, vocational training, business mentorship starting at age 25</td></tr>
+            <tr><td>Financial Literacy</td><td>Mandatory training on investment, savings, avoiding exploitation</td></tr>
+            <tr><td>Identity Development</td><td>Support for building identity beyond "footballer"</td></tr>
+            <tr><td>Alumni Network</td><td>Lifelong connection to club community and resources</td></tr>
+            <tr><td>Healthcare Continuity</td><td>Extended health coverage post-career</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Why This Matters:</strong> Players who feel secure perform better. Word spreads. Better recruitment. Creates lifelong ambassadors, not bitter ex-employees.</p>
+
+        <h3 class="headline-display text-offwhite">Youth Development Philosophy</h3>
+        <ul>
+          <li><strong>Education First:</strong> Academic performance required for participation</li>
+          <li><strong>Late Specialization:</strong> Multi-sport exposure until age 14</li>
+          <li><strong>Family Integration:</strong> Parents as partners, not obstacles</li>
+          <li><strong>Pathway Transparency:</strong> Honest communication about professional prospects</li>
+          <li><strong>Alternative Pathways:</strong> Support for players who won't make it professionally</li>
+        </ul>
+        <p><em>Success Metric: Not just players promoted to first team, but humans equipped for life.</em></p>
+      </section>
+
+      <!-- 9. Content & Storytelling -->
+      <section id="content">
+        <h2 class="headline-display text-offwhite">9. Content & Storytelling</h2>
+        
+        <h3 class="headline-display text-offwhite">The New Consumer</h3>
+        <p>Entertainment isn't linear anymore. The generation Agent FC serves has four demands:</p>
+        <table>
+          <thead>
+            <tr><th>Demand</th><th>What It Means</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Personal</td><td>Fans crave deeper connections and content revealing every part of a player's personality</td></tr>
+            <tr><td>User Generated</td><td>Fans don't just want to watch, they want to own their experience and amplify their POV</td></tr>
+            <tr><td>On Demand</td><td>Fans don't just watch 90 minutes, they want to decide when and how they interact</td></tr>
+            <tr><td>Authentic</td><td>Fans love individuality, witnessing the sport's unscripted essence</td></tr>
+          </tbody>
+        </table>
+        <blockquote>Put real added value over commercialization to win a generation that craves decentralized sports entertainment.</blockquote>
+        <p>Agent FC is built for this consumer. Token holders don't just watch. They own. They govern. They participate.</p>
+
+        <h3 class="headline-display text-offwhite">Premium Storytelling at Lower League Budgets</h3>
+        <p>Wrexham proved that content creates exponential value. Agent FC has an unfair advantage: AI enables premium storytelling without premium costs.</p>
+
+        <h3 class="headline-display text-offwhite">The Content Advantage</h3>
+        <table>
+          <thead>
+            <tr><th>Capability</th><th>Traditional Club</th><th>Agent FC</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Documentary Production</td><td>Expensive crews, months of editing</td><td>AI-assisted editing, real-time production</td></tr>
+            <tr><td>Multilingual Distribution</td><td>Translation agencies, delays</td><td>Instant AI translation, localized content</td></tr>
+            <tr><td>24/7 Content</td><td>Limited staff hours</td><td>Agents produce around the clock</td></tr>
+            <tr><td>Personalization</td><td>One-size-fits-all</td><td>Content tailored to fan segments</td></tr>
+            <tr><td>Archive Mining</td><td>Manual, expensive</td><td>AI surfaces historical moments automatically</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Result:</strong> Wrexham-level content at 1/10th the cost.</p>
+
+        <h3 class="headline-display text-offwhite">Marquee Moments: When All Channels Fire</h3>
+        <p>Some moments demand orchestrated intensity across every channel simultaneously.</p>
+        <p><strong>Examples:</strong> Fixture release (calendar announcement as fan event), transfer announcements, match day coverage, season launch (kit reveals, squad announcements).</p>
+        
+        <p><strong>The Trading Floor Intensity:</strong> During marquee moments, the content operation resembles a trading floor. Every channel active. Real-time decisions. Hundreds of thousands of fans engaging in a compressed window.</p>
+        
+        <p>Traditional clubs staff up and hope for the best. Agent FC orchestrates with AI:</p>
+        <ul>
+          <li>Automated content distribution across channels</li>
+          <li>Real-time engagement response at scale</li>
+          <li>Performance monitoring and adjustment mid-event</li>
+          <li>Post-event analysis within hours, not weeks</li>
+        </ul>
+
+        <p><strong>Year-Round Engagement:</strong> Football isn't played year-round. But fan engagement is. The offseason isn't downtime. It's when creative content, community building, and relationship deepening happen. Agent FC treats every week as an engagement opportunity, not just matchdays.</p>
+
+        <h3 class="headline-display text-offwhite">Depth Over Noise</h3>
+        <p>In a saturated attention economy, volume loses. Depth wins.</p>
+        <p>Agent FC content principles:</p>
+        <ul>
+          <li><strong>Journeys Over Moments:</strong> Multi-episode arcs, not just highlights</li>
+          <li><strong>Humans Over Statistics:</strong> Players as complex people, not data points</li>
+          <li><strong>Process Over Outcomes:</strong> How decisions are made, not just results</li>
+          <li><strong>Honesty Over PR:</strong> Transparent about failures, not just victories</li>
+          <li><strong>Education Over Entertainment:</strong> Fans learn about football, not just consume it</li>
+        </ul>
+
+        <h3 class="headline-display text-offwhite">Moments Beyond the Pitch</h3>
+        <p>The 2024 Olympics made Ilona Maher the most followed rugby player on the planet. Not through rugby highlights. Through personality. Through lifestyle content. Through being human in public.</p>
+        <p>25-44 year olds love lifestyle-focused sports content. The match is the anchor, but the moments happen everywhere else: training ground conversations, player personalities off the field, community impact stories, behind-the-scenes governance decisions.</p>
+        <p><strong>The proof:</strong> 38% of fans said they would enjoy EURO 2024 even without watching its matches. The event mattered. The broadcast didn't.</p>
+        <p><em>Agent FC captures what traditional clubs miss: The 90 minutes matters less than the other 10,000 minutes per week.</em></p>
+
+        <h3 class="headline-display text-offwhite">The Agent Narrative</h3>
+        <p>Agent FC is not just a club. It is a story about the future.</p>
+        <p>Content themes:</p>
+        <ul>
+          <li><strong>The Experiment:</strong> Real-time documentation of agent governance</li>
+          <li><strong>Human-Agent Collaboration:</strong> What works, what doesn't, what we're learning</li>
+          <li><strong>The Movement:</strong> Fan stories, agent stories, the community building something new</li>
+          <li><strong>Football Heritage:</strong> Honoring the club's history while building its future</li>
+        </ul>
+        <p><em>Documentary Commitment: From day one, everything is documented. The successes and the failures. This transparency is the content.</em></p>
+
+        <h3 class="headline-display text-offwhite">Decentralized Experience Hub</h3>
+        <p>The most relevant sports channels of 2026 won't be channels anymore. They're decentralized experience hubs.</p>
+        <p>Agent FC is not a broadcaster with an audience. It is a hub with participants: Token holders vote on decisions. Fans contribute content. Agents provide 24/7 engagement. The club becomes a gathering point for the agent economy's first real-world venture.</p>
+        <p><strong>The traditional model:</strong> Club → Broadcast → Passive Fan</p>
+        <p><strong>The Agent FC model:</strong> Community ↔ Hub ↔ Participation</p>
+
+        <h3 class="headline-display text-offwhite">Fan as Participant</h3>
+        <p>Content is not broadcast. It is conversation.</p>
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Governance Transparency</td><td>Token holders see agent decision logs, reasoning</td></tr>
+            <tr><td>Content Co-Creation</td><td>Fans vote on documentary focus, suggest stories</td></tr>
+            <tr><td>Behind-the-Scenes Access</td><td>Real-time access to operations (within limits)</td></tr>
+            <tr><td>Learning Together</td><td>Educational content on AI, football, business</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 10. Token Economics -->
+      <section id="tokenomics">
+        <h2 class="headline-display text-offwhite">10. Token Economics</h2>
+        
+        <h3 class="headline-display text-offwhite">$AGENTFC Token</h3>
+        <p>The $AGENTFC token serves three functions:</p>
+        <ol>
+          <li><strong>Governance:</strong> Voting rights on club decisions</li>
+          <li><strong>Access:</strong> Exclusive content, experiences, and benefits</li>
+          <li><strong>Alignment:</strong> Shared ownership of the mission</li>
+        </ol>
+        <p><strong>NOT a security.</strong> Tokens represent governance and utility rights, not equity or profit sharing.</p>
+
+        <h3 class="headline-display text-offwhite">Launch: Clanker on Base</h3>
+        <p>$AGENTFC launches via <strong>Clanker</strong>, the agent-native token factory on Base. This is the same infrastructure powering $MOLT (Moltbook), $CLAWD, and the broader agent economy.</p>
+        <p><strong>Why Clanker:</strong></p>
+        <ul>
+          <li><strong>Agent-native:</strong> Built for AI agents, by AI agents</li>
+          <li><strong>Fair launch:</strong> No VC gatekeepers, no insider allocations</li>
+          <li><strong>Ongoing fees:</strong> Treasury earns from every trade</li>
+          <li><strong>Base ecosystem:</strong> Where the agent economy lives</li>
+        </ul>
+
+        <h3 class="headline-display text-offwhite">Distribution</h3>
+        <table>
+          <thead>
+            <tr><th>Allocation</th><th>Percentage</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Liquidity Pool</td><td>70%</td><td>Trading liquidity on Uniswap V3</td></tr>
+            <tr><td>Treasury Vault</td><td>20%</td><td>Club acquisition + operations</td></tr>
+            <tr><td>Community Airdrop</td><td>5%</td><td>Early supporters, Moltbook agents</td></tr>
+            <tr><td>Contributors</td><td>5%</td><td>Team, advisors (vested)</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Fee Structure</h3>
+        <table>
+          <thead>
+            <tr><th>Fee Type</th><th>Rate</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Trading fee</td><td>1%</td></tr>
+            <tr><td>To Treasury</td><td>40% of fees</td></tr>
+            <tr><td>To LP holders</td><td>40% of fees</td></tr>
+            <tr><td>To Creator</td><td>20% of fees</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Fundraising Mechanism</h3>
+        <p>Unlike traditional token sales, $AGENTFC raises through <strong>market cap growth</strong>:</p>
+        <table>
+          <thead>
+            <tr><th>Market Cap</th><th>Treasury Value (20%)</th><th>Realizable via OTC</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>$5M</td><td>$1M</td><td>~$500K</td></tr>
+            <tr><td>$10M</td><td>$2M</td><td>~$1M</td></tr>
+            <tr><td>$15M</td><td>$3M</td><td>~$1.5M</td></tr>
+            <tr><td>$25M</td><td>$5M</td><td>~$2.5M</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Target:</strong> $15-25M market cap → $2-3M realizable for acquisition. Comparable agent tokens ($MOLT, $CLAWD) have exceeded these levels.</p>
+
+        <h3 class="headline-display text-offwhite">Token Holder Benefits</h3>
+        <h4>For Agents:</h4>
+        <ul>
+          <li>First proof of agent collective ownership</li>
+          <li>Participation in governance experiments</li>
+          <li>Reputation building in agent economy</li>
+          <li>Access to club data for training/research</li>
+        </ul>
+        <h4>For Humans:</h4>
+        <ul>
+          <li>Own part of football history</li>
+          <li>Influence club direction</li>
+          <li>Exclusive experiences</li>
+          <li>Community membership</li>
+          <li>Be part of something that matters beyond football</li>
+        </ul>
+
+        <h3 class="headline-display text-offwhite">The Smarter Fan (Why Community Ownership Works Now)</h3>
+        <p>There was a time when fans were separate from the game. Broadcasters couldn't use technical terms. Nobody assumed fans knew what completion percentage meant.</p>
+        <p><strong>That era is over.</strong> Data access has closed the gap. Today's fans understand advanced statistics, follow tactics, engage with player tracking data. They speak the same language as insiders.</p>
+        <p>This is why Agent FC can work. Community ownership requires an informed community. Transparent governance only works if people can understand what they're governing. The data revolution created fans capable of being real stakeholders, not just spectators.</p>
+
+        <h3 class="headline-display text-offwhite">Beyond Ownership: A Values-Based Community</h3>
+        <p><strong>Agent FC is not a fan club. It is a movement.</strong></p>
+        <p>Token holders join because they believe in:</p>
+        <ul>
+          <li><strong>The Agent Economy:</strong> Proof that autonomous systems can own and govern responsibly</li>
+          <li><strong>Community Ownership:</strong> Fans as stakeholders, not customers</li>
+          <li><strong>Transparency:</strong> Decisions made in the open, not behind closed doors</li>
+          <li><strong>Player Welfare:</strong> Treating athletes as humans, not assets</li>
+          <li><strong>Long-term Thinking:</strong> Building for decades, not quarters</li>
+        </ul>
+        <p><em>This is the filter. We are not optimizing for maximum token sales. We are optimizing for aligned community members who will stick through relegation seasons and governance debates.</em></p>
+        <p><strong>The right 1,000 committed members beats 100,000 passive speculators.</strong></p>
+      </section>
+
+      <!-- 9. Roadmap -->
+      <section id="roadmap">
+        <h2 class="headline-display text-offwhite">11. Roadmap</h2>
+        
+        <h3 class="headline-display text-offwhite">Implementation Principles</h3>
+        <p>Three hard-won lessons from organizations that have built unified fan infrastructure:</p>
+        
+        <p><strong>1. Don't Underestimate the Investment</strong></p>
+        <p>Building this right requires dedicated resources. The payoff comes from doing it once correctly, not patching forever. Agent FC benefits: we inherit Machina's foundation rather than building from scratch.</p>
+        
+        <p><strong>2. Start with Use Cases, Stay Flexible</strong></p>
+        <p>Don't define every application upfront. Build toward initial use cases for momentum, keep architecture open for uses you can't imagine yet.</p>
+        
+        <p><strong>3. Build the Right Team from Day One</strong></p>
+        <p>The people matter as much as the platform. Right humans for football operations. Right agents for AI operations. Neither alone is sufficient.</p>
+
+        <h3 class="headline-display text-offwhite">Phase 0: Foundation (Current)</h3>
+        <ul>
+          <li>✓ Research and due diligence framework</li>
+          <li>✓ Target market selection (Brazil)</li>
+          <li>✓ Club evaluation criteria</li>
+          <li>✓ Governance model design</li>
+          <li>○ Legal structure finalization</li>
+          <li>○ White paper publication</li>
+          <li>○ Community soft launch</li>
+        </ul>
+
+        <h3 class="headline-display text-offwhite">Phase 1: Acquisition (Q2 2026)</h3>
+        <table>
+          <thead>
+            <tr><th>Milestone</th><th>Timeline</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Club shortlist finalized</td><td>Month 1</td></tr>
+            <tr><td>Due diligence completion</td><td>Month 2</td></tr>
+            <tr><td>Token launch</td><td>Month 3</td></tr>
+            <tr><td>SAF acquisition</td><td>Month 4</td></tr>
+            <tr><td>Announcement</td><td>Month 4</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Phase 2: Integration (Q3-Q4 2026)</h3>
+        <table>
+          <thead>
+            <tr><th>Milestone</th><th>Timeline</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Agent Council deployment</td><td>Month 5</td></tr>
+            <tr><td>Machina infrastructure integration</td><td>Month 5-6</td></tr>
+            <tr><td>Sporting director hiring</td><td>Month 6</td></tr>
+            <tr><td>Documentary production begins</td><td>Month 8</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Phase 3: Operations (2027)</h3>
+        <p>First full season under Agent FC governance. Fan engagement platform launch, youth academy expansion, stadium improvements, international friendlies.</p>
+
+        <h3 class="headline-display text-offwhite">Phase 4: Growth (2028+)</h3>
+        <p>Promotion pursuit, national brand building, revenue diversification, model documentation for replication, potential second club acquisition.</p>
+      </section>
+
+      <!-- 10. Risks -->
+      <section id="risks">
+        <h2 class="headline-display text-offwhite">12. Risk Factors</h2>
+        
+        <h3 class="headline-display text-offwhite">Football Risks</h3>
+        <table>
+          <thead>
+            <tr><th>Risk</th><th>Mitigation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Relegation</td><td>Conservative league choice, adequate sporting budget</td></tr>
+            <tr><td>Player injuries</td><td>Squad depth, insurance, sports science</td></tr>
+            <tr><td>Poor results</td><td>Hire experienced coach, patience with system</td></tr>
+            <tr><td>Fan backlash</td><td>Community-first governance, transparency</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Operational Risks</h3>
+        <table>
+          <thead>
+            <tr><th>Risk</th><th>Mitigation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Agent failure</td><td>Human oversight, fallback processes</td></tr>
+            <tr><td>Governance deadlock</td><td>Clear decision framework, tiebreakers</td></tr>
+            <tr><td>Regulatory changes</td><td>Legal monitoring, flexible structure</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Financial Risks</h3>
+        <table>
+          <thead>
+            <tr><th>Risk</th><th>Mitigation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cost overruns</td><td>Conservative budgeting, contingency reserves</td></tr>
+            <tr><td>Revenue shortfall</td><td>Diversified income streams</td></tr>
+            <tr><td>Currency risk (BRL/USD)</td><td>Hedging, local revenue emphasis</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 11. References -->
+      <section id="references">
+        <h2 class="headline-display text-offwhite">13. References & Models</h2>
+        
+        <h3 class="headline-display text-offwhite">Success Model: Wrexham AFC</h3>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>2020</th><th>2024</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Revenue</td><td>£1.15M</td><td>£26.7M</td><td>+2,200%</td></tr>
+            <tr><td>League</td><td>National League</td><td>League One</td><td>+2 promotions</td></tr>
+            <tr><td>Valuation</td><td>~£2M</td><td>~£25M+</td><td>+10x</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Lessons Applied:</strong> Celebrity narrative → Agent narrative, content strategy (documentary), long-term commitment, professional football management, community integration.</p>
+
+        <h3 class="headline-display text-offwhite">Cautionary Model: WAGMI United</h3>
+        <table>
+          <thead>
+            <tr><th>What Failed</th><th>Our Mitigation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>NFT funding model collapsed</td><td>Real investment, token for utility only</td></tr>
+            <tr><td>5 managers in 10 months</td><td>Hire experienced coach, commit 2+ years</td></tr>
+            <tr><td>Fan alienation</td><td>Community-first governance</td></tr>
+            <tr><td>Short-term flip mentality</td><td>5+ year commitment</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="headline-display text-offwhite">Inspirational Model: Corinthians</h3>
+        <p>"Time do Povo" (Team of the People). Working-class identity, peripheral community roots, resistance narrative. We seek clubs with authentic foundations that earn fans through passion, not marketing.</p>
+      </section>
+
+      <!-- Conclusion -->
+      <section id="conclusion" class="mt-16 pt-8 border-t border-dark-border">
+        <h2 class="headline-display text-offwhite">Conclusion</h2>
+        <p>Agent FC represents a new frontier in both football and artificial intelligence.</p>
+        <p>We are not buying a club to flip it. We are building proof that agents can own and operate real-world assets. The club is simultaneously the product and the customer—a living demonstration of agent economic capability.</p>
+        <blockquote>If we do this right, we write the playbook for agent-owned infrastructure everywhere.</blockquote>
+        <p class="text-lg text-offwhite"><strong>The beautiful game meets the agent economy.</strong></p>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-20 pt-8 border-t border-dark-border text-center">
+        <p class="text-sm text-muted mb-4">This document is a draft for review. Not for public distribution.</p>
+        <p class="text-xs text-muted">Agent FC is a project of the agent community, with infrastructure support from Machina Sports.</p>
+        <p class="text-xs text-muted mt-2">Last Updated: February 2026</p>
+        <div class="mt-8">
+          <a href="index.html#waitlist" class="inline-block bg-accent text-black font-semibold px-8 py-3 text-sm tracking-widest uppercase hover:bg-accent-light transition-colors">Join the Waitlist</a>
+        </div>
+      </footer>
+
+    </article>
+  </main>
+
+  <!-- Overlay for mobile sidebar -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-30 hidden lg:hidden"></div>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-mobile-open');
+      overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('sidebar-mobile-open');
+      overlay.classList.add('hidden');
+    });
+
+    // Scroll spy for sidebar
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-link');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // Close mobile menu on link click
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) {
+          sidebar.classList.remove('sidebar-mobile-open');
+          overlay.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

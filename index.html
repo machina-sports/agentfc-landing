@@ -83,21 +83,35 @@
   <!-- Hero -->
   <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden">
     <div class="max-w-5xl mx-auto w-full py-24">
-      <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs mb-10 fade-in">Agent FC</p>
+      <div class="flex items-center gap-3 mb-10 fade-in">
+        <svg class="w-4 h-4 text-accent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polygon points="8,1 15,5 15,11 8,15 1,11 1,5"/>
+        </svg>
+        <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs">Agent FC</p>
+      </div>
       <h1 class="hero-headline headline-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-headline mb-10 fade-in text-offwhite">
         The first football club<br>owned by AI agents.
       </h1>
       <p class="text-lg md:text-xl text-muted max-w-xl leading-[1.7] mb-14 fade-in font-normal">
         A real club. Real stakes. Governed by agents, owned by the community, operated by professionals. This is not a thought experiment.
       </p>
-      <div class="fade-in">
+      <div class="fade-in flex flex-wrap items-center gap-4">
         <a href="#waitlist" class="inline-block bg-accent text-black font-semibold px-10 py-4 text-sm tracking-[0.15em] uppercase hover:bg-accent-light transition-colors duration-300">
           Join the Waitlist
         </a>
+        <a href="whitepaper.html" class="inline-block border border-dark-border text-muted font-medium px-8 py-4 text-sm tracking-[0.1em] uppercase hover:text-offwhite hover:border-muted transition-colors duration-300">
+          Read White Paper
+        </a>
       </div>
     </div>
-    <div class="absolute bottom-12 left-6 md:left-12 lg:left-24 fade-in">
-      <p class="text-muted text-sm tracking-widest uppercase">Scroll</p>
+    <div class="absolute bottom-12 left-0 right-0 px-6 md:px-12 lg:px-24">
+      <div class="max-w-5xl mx-auto fade-in flex items-center gap-2">
+        <svg class="w-4 h-4 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="8" y1="2" x2="8" y2="14"/>
+          <polyline points="4,10 8,14 12,10"/>
+        </svg>
+        <p class="text-muted text-sm tracking-widest uppercase">Scroll</p>
+      </div>
     </div>
   </section>
 
@@ -109,7 +123,13 @@
   <!-- The Thesis -->
   <section class="px-6 md:px-12 lg:px-24 py-32 md:py-44">
     <div class="max-w-5xl mx-auto">
-      <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs mb-10 fade-in">The Thesis</p>
+      <div class="flex items-center gap-3 mb-10 fade-in">
+        <svg class="w-4 h-4 text-accent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="8" cy="8" r="6"/>
+          <circle cx="8" cy="8" r="2"/>
+        </svg>
+        <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs">The Thesis</p>
+      </div>
       <h2 class="headline-display text-3xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-headline mb-14 fade-in text-offwhite">
         If agents can run a football club, they can run anything.
       </h2>
@@ -135,14 +155,32 @@
   <!-- How It Works -->
   <section class="px-6 md:px-12 lg:px-24 py-32 md:py-44">
     <div class="max-w-5xl mx-auto">
-      <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs mb-10 fade-in">How It Works</p>
+      <div class="flex items-center gap-3 mb-10 fade-in">
+        <svg class="w-4 h-4 text-accent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="5" height="5"/>
+          <rect x="9" y="2" width="5" height="5"/>
+          <rect x="2" y="9" width="5" height="5"/>
+          <rect x="9" y="9" width="5" height="5"/>
+        </svg>
+        <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs">How It Works</p>
+      </div>
       <h2 class="headline-display text-3xl md:text-5xl leading-[1.05] tracking-headline mb-20 fade-in text-offwhite">
         Three pillars. One club.
       </h2>
       <div class="grid md:grid-cols-3 gap-16 md:gap-10">
         <!-- Pillar 1 -->
         <div class="fade-in">
-          <div class="font-display text-accent text-5xl md:text-6xl font-semibold mb-6 tracking-tight">01</div>
+          <div class="mb-6 flex items-center gap-4">
+            <svg class="w-10 h-10 text-accent" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="20" cy="20" r="16"/>
+              <circle cx="20" cy="20" r="6"/>
+              <line x1="20" y1="4" x2="20" y2="14"/>
+              <line x1="20" y1="26" x2="20" y2="36"/>
+              <line x1="4" y1="20" x2="14" y2="20"/>
+              <line x1="26" y1="20" x2="36" y2="20"/>
+            </svg>
+            <span class="font-display text-accent text-3xl font-semibold tracking-tight">01</span>
+          </div>
           <h3 class="headline-display text-xl md:text-2xl mb-4 text-offwhite">Agents Operate</h3>
           <p class="text-muted leading-[1.75] text-sm md:text-base">
             AI agents handle day-to-day club decisions. Scouting, analytics, financial management, fan engagement. The operations layer is autonomous.
@@ -150,7 +188,13 @@
         </div>
         <!-- Pillar 2 -->
         <div class="fade-in">
-          <div class="font-display text-accent text-5xl md:text-6xl font-semibold mb-6 tracking-tight">02</div>
+          <div class="mb-6 flex items-center gap-4">
+            <svg class="w-10 h-10 text-accent" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polygon points="20,4 36,32 4,32"/>
+              <polygon points="20,14 28,28 12,28"/>
+            </svg>
+            <span class="font-display text-accent text-3xl font-semibold tracking-tight">02</span>
+          </div>
           <h3 class="headline-display text-xl md:text-2xl mb-4 text-offwhite">Community Owns</h3>
           <p class="text-muted leading-[1.75] text-sm md:text-base">
             Token holders are the ultimate authority. Governance is decentralized. Every major decision flows through the community. Your club, your call.
@@ -158,7 +202,13 @@
         </div>
         <!-- Pillar 3 -->
         <div class="fade-in">
-          <div class="font-display text-accent text-5xl md:text-6xl font-semibold mb-6 tracking-tight">03</div>
+          <div class="mb-6 flex items-center gap-4">
+            <svg class="w-10 h-10 text-accent" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="6" y="6" width="28" height="28" rx="2"/>
+              <polyline points="12,20 18,26 28,14"/>
+            </svg>
+            <span class="font-display text-accent text-3xl font-semibold tracking-tight">03</span>
+          </div>
           <h3 class="headline-display text-xl md:text-2xl mb-4 text-offwhite">Experts Execute</h3>
           <p class="text-muted leading-[1.75] text-sm md:text-base">
             Human professionals handle what humans do best. Coaching, player development, match-day operations. The football stays real.
@@ -176,26 +226,52 @@
   <!-- Why Brazil -->
   <section class="px-6 md:px-12 lg:px-24 py-32 md:py-44">
     <div class="max-w-5xl mx-auto">
-      <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs mb-10 fade-in">Why Brazil</p>
+      <div class="flex items-center gap-3 mb-10 fade-in">
+        <svg class="w-4 h-4 text-accent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polygon points="8,1 10,6 15,6 11,10 13,15 8,12 3,15 5,10 1,6 6,6"/>
+        </svg>
+        <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs">Why Brazil</p>
+      </div>
       <h2 class="headline-display text-3xl md:text-5xl leading-[1.05] tracking-headline mb-16 fade-in text-offwhite">
         The best market on earth for this.
       </h2>
       <div class="grid md:grid-cols-2 gap-16 md:gap-20">
         <div class="space-y-12 fade-in">
           <div>
-            <h3 class="headline-display text-lg md:text-xl mb-3 text-offwhite">SAF Law</h3>
+            <div class="flex items-center gap-3 mb-3">
+              <svg class="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="2" width="14" height="16" rx="1"/>
+                <line x1="6" y1="6" x2="14" y2="6"/>
+                <line x1="6" y1="10" x2="14" y2="10"/>
+                <line x1="6" y1="14" x2="10" y2="14"/>
+              </svg>
+              <h3 class="headline-display text-lg md:text-xl text-offwhite">SAF Law</h3>
+            </div>
             <p class="text-muted leading-[1.75] text-sm md:text-base">
               Brazil's Sociedade Anônima do Futebol law enables clean, structured club acquisitions. Purpose-built legislation that turns clubs into investable entities.
             </p>
           </div>
           <div>
-            <h3 class="headline-display text-lg md:text-xl mb-3 text-offwhite">10x Cheaper Than Europe</h3>
+            <div class="flex items-center gap-3 mb-3">
+              <svg class="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="2" y1="16" x2="18" y2="4"/>
+                <polyline points="12,4 18,4 18,10"/>
+              </svg>
+              <h3 class="headline-display text-lg md:text-xl text-offwhite">10x Cheaper Than Europe</h3>
+            </div>
             <p class="text-muted leading-[1.75] text-sm md:text-base">
               Acquire a professional club at a fraction of what it costs in England, Spain, or Italy. Better unit economics. Higher upside.
             </p>
           </div>
           <div>
-            <h3 class="headline-display text-lg md:text-xl mb-3 text-offwhite">215 Million People</h3>
+            <div class="flex items-center gap-3 mb-3">
+              <svg class="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="8"/>
+                <ellipse cx="10" cy="10" rx="3" ry="8"/>
+                <line x1="2" y1="10" x2="18" y2="10"/>
+              </svg>
+              <h3 class="headline-display text-lg md:text-xl text-offwhite">215 Million People</h3>
+            </div>
             <p class="text-muted leading-[1.75] text-sm md:text-base">
               Football is not a sport in Brazil. It is religion. The largest passionate fanbase on the planet. Built-in demand from day one.
             </p>
@@ -203,7 +279,13 @@
         </div>
         <div class="flex items-center fade-in">
           <div class="border border-dark-border p-10 md:p-14 w-full bg-dark-card">
-            <p class="headline-display text-5xl md:text-7xl text-accent mb-5 tracking-tight">2,200%</p>
+            <div class="flex items-end gap-4 mb-5">
+              <p class="headline-display text-5xl md:text-7xl text-accent tracking-tight">2,200%</p>
+              <svg class="w-8 h-8 text-accent mb-2" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="4,24 12,16 18,20 28,8"/>
+                <polyline points="20,8 28,8 28,16"/>
+              </svg>
+            </div>
             <p class="text-muted leading-[1.75] text-sm md:text-base">
               Wrexham's revenue growth after acquisition. We are applying that playbook — community energy, global storytelling, strategic investment — with agent governance on top.
             </p>
@@ -221,7 +303,13 @@
   <!-- Waitlist CTA -->
   <section id="waitlist" class="px-6 md:px-12 lg:px-24 py-32 md:py-44">
     <div class="max-w-3xl mx-auto text-center">
-      <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs mb-10 fade-in">Get In Early</p>
+      <div class="flex items-center justify-center gap-3 mb-10 fade-in">
+        <svg class="w-4 h-4 text-accent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="3" width="14" height="10" rx="1"/>
+          <polyline points="1,4 8,9 15,4"/>
+        </svg>
+        <p class="text-accent font-medium tracking-[0.3em] uppercase text-xs">Get In Early</p>
+      </div>
       <h2 class="headline-display text-3xl md:text-5xl leading-[1.05] tracking-headline mb-8 fade-in text-offwhite">
         This is happening.
       </h2>
@@ -258,10 +346,17 @@
   <!-- Footer -->
   <footer class="px-6 md:px-12 lg:px-24 py-20">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
+          <line x1="12" y1="2" x2="12" y2="22"/>
+          <line x1="2" y1="8" x2="22" y2="16"/>
+          <line x1="22" y1="8" x2="2" y2="16"/>
+        </svg>
         <p class="headline-display text-offwhite text-lg tracking-tight">Agent FC</p>
       </div>
-      <div>
+      <div class="flex items-center gap-6">
+        <a href="whitepaper.html" class="text-muted text-xs tracking-wide hover:text-accent transition-colors">White Paper</a>
         <p class="text-muted text-xs tracking-wide">&copy; 2026 Agent FC. All rights reserved.</p>
       </div>
     </div>
